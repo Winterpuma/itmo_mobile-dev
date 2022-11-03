@@ -4,4 +4,9 @@
     <string name="hide_list_button">Hide list</string>
     <string name="show_toast_button">Toast</string>
     <string name="switch_text">Change label color</string>
+    <string name="number_stub">1</string>
+    <string name="nat">Nat</string>
+    <string name="fib">Fib</string>
+    <string name="col">Col</string>
+    <string name="description_stub">Abcdofhseo efhosh eoheoheohseoh osfe hohsefohofse he ohsfoheoh sfoehefoh</string>
 </resources>
