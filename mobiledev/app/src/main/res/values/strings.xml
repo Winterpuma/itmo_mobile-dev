@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">mobile-dev</string>
+    <string name="regular_label">Regular font label</string>
+    <string name="hide_list_button">Hide list</string>
+    <string name="show_toast_button">Toast</string>
+    <string name="switch_text">Change label color</string>
 </resources>

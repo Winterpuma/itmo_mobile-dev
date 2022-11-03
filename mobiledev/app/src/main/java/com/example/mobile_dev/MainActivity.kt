@@ -2,6 +2,7 @@ package com.example.mobile_dev
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -21,7 +22,10 @@ class MainActivity : AppCompatActivity() {
         val button2:Button = findViewById(R.id.button2)
         val button3:Button = findViewById(R.id.button3)
 
-        button1.setOnClickListener { showToast("In first") }
+        button1.setOnClickListener {
+            val intent = Intent(this@MainActivity, FirstActivity::class.java)
+            startActivity(intent)
+        }
         button2.setOnClickListener { showToast("In second") }
         button3.setOnClickListener { showToast("In third") }
 
