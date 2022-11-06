@@ -25,8 +25,12 @@
 
         <activity
             android:name=".FirstActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"/>
+
+        <activity
+            android:name=".DetailsActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
 
     </application>
 
