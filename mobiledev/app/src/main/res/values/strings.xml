@@ -9,4 +9,10 @@
     <string name="fib">Fib</string>
     <string name="col">Col</string>
     <string name="description_stub">Abcdofhseo efhosh eoheoheohseoh osfe hohsefohofse he ohsfoheoh sfoehefoh</string>
+    <string-array name="cat_names">
+        <item>Рыжик</item>
+        <item>Барсик</item>
+        <item>Мурзик</item>
+        <item>Мурка</item>
+    </string-array>
 </resources>
