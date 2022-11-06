@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val button3:Button = findViewById(R.id.button3)
 
         button1.setOnClickListener {
-            val intent = Intent(this@MainActivity, FirstActivity::class.java)
+            val intent = Intent(this@MainActivity, DetailsActivity::class.java)
             startActivity(intent)
         }
         button2.setOnClickListener { showToast("In second") }
