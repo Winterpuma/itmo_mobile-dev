@@ -1,5 +1,7 @@
 package com.example.mobile_dev
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Button
@@ -15,7 +17,34 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
+        saveNumbers()
         init()
+        getNumbers()
+    }
+
+    fun saveNumbers() {
+        val settings: SharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = settings.edit()
+
+        editor.putString(NAT_VALUE, findViewById<TextView>(R.id.textView_nat).text.toString())
+        editor.putString(FIB_VALUE, findViewById<TextView>(R.id.textView_fib).text.toString())
+        editor.putString(COL_VALUE, findViewById<TextView>(R.id.textView_col).text.toString())
+
+        editor.apply()
+    }
+
+    fun getNumbers() {
+        val settings: SharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+
+        findViewById<TextView>(R.id.textView_nat).text = settings.getString(NAT_VALUE, "1")
+        findViewById<TextView>(R.id.textView_fib).text = settings.getString(FIB_VALUE, "1")
+        findViewById<TextView>(R.id.textView_col).text = settings.getString(COL_VALUE, "1")
+    }
+
+    companion object {
+        const val NAT_VALUE = "nat"
+        const val FIB_VALUE = "fib"
+        const val COL_VALUE = "col"
     }
 
     private fun init() {
