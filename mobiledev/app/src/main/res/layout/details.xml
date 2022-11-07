@@ -92,6 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:text="@string/nat"
+        android:backgroundTint="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="@+id/button_fib"
         app:layout_constraintEnd_toStartOf="@+id/button_fib"
         app:layout_constraintStart_toStartOf="parent" />
@@ -116,6 +117,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="60dp"
         android:text="@string/fib"
+        android:backgroundTint="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_col"
         app:layout_constraintStart_toEndOf="@+id/button_nat" />
@@ -138,6 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="@string/col"
+        android:backgroundTint="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="@+id/button_fib"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_fib" />

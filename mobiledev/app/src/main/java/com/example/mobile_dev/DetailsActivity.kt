@@ -22,7 +22,7 @@ class DetailsActivity : AppCompatActivity() {
         getNumbers()
     }
 
-    fun saveNumbers() {
+    private fun saveNumbers() {
         val settings: SharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = settings.edit()
 
@@ -33,7 +33,7 @@ class DetailsActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    fun getNumbers() {
+    private fun getNumbers() {
         val settings: SharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
 
         findViewById<TextView>(R.id.textView_nat).text = settings.getString(NAT_VALUE, "1")

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 
 
@@ -51,10 +53,10 @@ class FirstActivity : AppCompatActivity() {
             val labelText: TextView = findViewById(R.id.label_text)
 
             if (isChecked) {
-                labelText.setTextColor(Color.GREEN)
+                labelText.setTextColor(ResourcesCompat.getColor(resources, R.color.teal_700, null))
             }
             else {
-                labelText.setTextColor(Color.GRAY)
+                labelText.setTextColor(ResourcesCompat.getColor(resources, R.color.grey, null))
             }
         }
     }

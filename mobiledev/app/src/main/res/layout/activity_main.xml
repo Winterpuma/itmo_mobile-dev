@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="@color/purple_200"
     android:showDividers="middle">
 
     <com.google.android.material.divider.MaterialDivider
@@ -20,6 +19,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/purple_500"
         android:text="1" />
 
     <com.google.android.material.divider.MaterialDivider
@@ -33,6 +33,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/purple_500"
         android:text="2" />
 
     <com.google.android.material.divider.MaterialDivider
@@ -46,6 +47,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/purple_500"
         android:text="3" />
 
     <com.google.android.material.divider.MaterialDivider
@@ -72,6 +74,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginRight="20dp"
+            android:backgroundTint="@color/purple_500"
             android:text="-" />
 
         <Button
@@ -79,6 +82,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
+            android:backgroundTint="@color/purple_500"
             android:text="+" />
 
     </LinearLayout>

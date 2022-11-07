@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical"
-             android:paddingLeft="30dp"
-             android:paddingRight="30dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/purple_500"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center"
+        android:layout_marginTop="25dp"
         android:layout_weight="1"
-        android:layout_marginTop="25dp">
+        android:orientation="horizontal">
 
         <ListView
             android:layout_width="0dp"
             android:layout_height="300dp"
-            android:layout_weight="1"
-            android:layout_margin="20dp"/>
+            android:layout_margin="20dp"
+            android:layout_weight="1" />
 
 
         <LinearLayout
@@ -48,46 +49,46 @@
         android:id="@+id/label_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="1"
-        android:text="@string/regular_label"
-        android:layout_gravity="center_horizontal"/>
+        android:text="@string/regular_label" />
 
     <EditText
         android:id="@+id/edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="center_horizontal"
-        android:gravity="center"/>
+        android:layout_weight="1"
+        android:gravity="center" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:orientation="horizontal">
 
         <Switch
             android:id="@+id/switch_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/switch_text"
-            android:textSize="12dp"
-            android:layout_gravity="center"/>
+            android:textSize="12dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="25dp">
+        android:layout_marginBottom="25dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -101,6 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/purple_500"
                 android:text="@string/hide_list_button" />
 
             <Button
@@ -108,6 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/purple_500"
                 android:text="@string/show_toast_button" />
         </LinearLayout>
 
@@ -115,15 +118,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/button_set_label"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:text="T"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            android:backgroundTint="@color/purple_500"
+            android:text="T" />
 
     </LinearLayout>
 

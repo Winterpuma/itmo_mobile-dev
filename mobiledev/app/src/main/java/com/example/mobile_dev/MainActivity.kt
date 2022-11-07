@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private  fun showToast(str : String) {
+    private fun showToast(str : String) {
         Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
     }
 
