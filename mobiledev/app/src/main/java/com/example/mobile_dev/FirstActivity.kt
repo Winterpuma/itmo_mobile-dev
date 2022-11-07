@@ -1,11 +1,11 @@
 package com.example.mobile_dev
 
-import android.graphics.Color
+import android.app.ActionBar
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 
@@ -59,6 +59,14 @@ class FirstActivity : AppCompatActivity() {
                 labelText.setTextColor(ResourcesCompat.getColor(resources, R.color.grey, null))
             }
         }
+
+        val img1 = findViewById<ImageView>(R.id.image1)
+        val img2 = findViewById<ImageView>(R.id.image2)
+        val img3 = findViewById<ImageView>(R.id.image3)
+
+        img1.setImageResource(resources.getIdentifier("@drawable/pic1", null, packageName))
+        img2.setImageResource(resources.getIdentifier("@drawable/pic2", null, packageName))
+        img3.setImageResource(resources.getIdentifier("@drawable/pic3", null, packageName))
     }
 
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/purple_500"
@@ -9,17 +11,41 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="304dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <ListView
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:layout_margin="20dp"
-            android:layout_weight="1" />
+            android:layout_weight="1">
+
+
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="match_parent"
+                android:layout_height="272dp"
+                android:scaleType="fitXY"
+                tools:src="@drawable/pic1" />
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="62dp"
+                android:layout_height="73dp"
+                android:layout_gravity="end|top"
+                tools:src="@drawable/pic2" />
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="71dp"
+                android:layout_height="91dp"
+                tools:src="@drawable/pic3"
+                android:layout_gravity="start|bottom"
+                android:paddingBottom="40dp"/>
+        </FrameLayout>
 
 
         <LinearLayout
@@ -37,7 +63,7 @@
             <ListView
                 android:id="@+id/listView"
                 android:layout_width="155dp"
-                android:layout_height="300dp"
+                android:layout_height="274dp"
                 android:layout_margin="20dp" />
 
         </LinearLayout>
@@ -82,6 +108,11 @@
             android:textSize="12dp" />
     </LinearLayout>
 
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="5"
+        android:visibility="invisible" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -126,8 +157,9 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_weight="2"
-            android:backgroundTint="@color/purple_500"
-            android:text="T" />
+            android:background="@drawable/roundedbutton"
+            android:rotation="-30"
+            android:text="M" />
 
     </LinearLayout>
 
