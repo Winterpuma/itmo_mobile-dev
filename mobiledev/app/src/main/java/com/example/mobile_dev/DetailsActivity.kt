@@ -3,11 +3,15 @@ package com.example.mobile_dev
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
+import java.io.File
 import java.io.IOException
 import java.io.InputStream
 
@@ -15,7 +19,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private var name: String = "cat name"
     private var descrtiption: String = "descr"
-    private var imgPath: String = "img.json"
+    private var imgPath: String = "pic1.json"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,10 @@ class DetailsActivity : AppCompatActivity() {
 
         val descr: TextView = findViewById(R.id.textView_descr)
         descr.text = descrtiption
+
+        val img: ImageView = findViewById(R.id.imageView)
+        val path = "@drawable/$imgPath"
+        img.setImageResource(resources.getIdentifier(path, null, packageName))
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -41,7 +49,10 @@ class DetailsActivity : AppCompatActivity() {
         getNumbers()
 
         val title: TextView = findViewById(R.id.textView_title)
+        val descr: TextView = findViewById(R.id.textView_descr)
+
         title.text = name
+        descr.text = descrtiption
     }
 
     private fun saveNumbers() {
