@@ -7,12 +7,31 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONObject
+import java.io.IOException
+import java.io.InputStream
 
 class DetailsActivity : AppCompatActivity() {
+
+    private var name: String = "cat name"
+    private var descrtiption: String = "descr"
+    private var imgPath: String = "img.json"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
+
+        val title: TextView = findViewById(R.id.textView_title)
+        val catName = intent.getStringExtra("name")
+
+        if (catName != null) {
+            name = catName
+            title.text = name
+            readJsonCatData(name)
+        }
+
+        val descr: TextView = findViewById(R.id.textView_descr)
+        descr.text = descrtiption
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -20,6 +39,9 @@ class DetailsActivity : AppCompatActivity() {
         saveNumbers()
         init()
         getNumbers()
+
+        val title: TextView = findViewById(R.id.textView_title)
+        title.text = name
     }
 
     private fun saveNumbers() {
@@ -66,4 +88,27 @@ class DetailsActivity : AppCompatActivity() {
         label.text = cur.toString()
     }
 
+    private fun readJsonCatData(catName: String) {
+        val text = LoadData("catData.json")
+        val ob = JSONObject(text)
+        val cat = ob.getJSONObject(catName)
+
+        descrtiption = cat.getString("description")
+        imgPath = cat.getString("img")
+    }
+
+    private fun LoadData(inFile: String?): String? {
+        var tContents: String? = ""
+        try {
+            val stream: InputStream = assets.open(inFile!!)
+            val size: Int = stream.available()
+            val buffer = ByteArray(size)
+            stream.read(buffer)
+            stream.close()
+            tContents = String(buffer)
+        } catch (e: IOException) {
+            // Handle exceptions here
+        }
+        return tContents
+    }
 }
