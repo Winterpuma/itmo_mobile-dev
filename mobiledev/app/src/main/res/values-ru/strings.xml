@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">mobile-dev</string>
+    <string name="regular_label">Текст обычного размера</string>
+    <string name="hide_list_button">Спрятать</string>
+    <string name="show_toast_button">Тост</string>
+    <string name="switch_text">Изменить цвет текста</string>
+    <string name="number_stub">1</string>
+    <string name="icon_stub">o</string>
+    <string name="nat">Нат</string>
+    <string name="fib">Фиб</string>
+    <string name="col">Кол</string>
+    <string name="description_stub">Абвг Деежзззз eoheoheohseoh osfe hohsefohofse he ohsfoheoh sfoehefoh</string>
+    <string-array name="cat_names">
+        <item>Рыжик</item>
+        <item>Барсик</item>
+        <item>Мурзик</item>
+        <item>Мурка</item>
+    </string-array>
+</resources>

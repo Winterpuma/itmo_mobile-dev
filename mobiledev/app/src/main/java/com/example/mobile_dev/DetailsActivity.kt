@@ -14,6 +14,7 @@ import org.json.JSONObject
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
+import java.util.*
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -100,7 +101,12 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun readJsonCatData(catName: String) {
-        val text = loadData("catData.json")
+        val lang = resources.configuration.locale.language
+        var text = loadData("catData-$lang.json")
+
+        if (text == null)
+            text = loadData("catData.json")
+
         val ob = JSONObject(text)
         val cat = ob.getJSONObject(catName)
 
@@ -118,7 +124,7 @@ class DetailsActivity : AppCompatActivity() {
             stream.close()
             tContents = String(buffer)
         } catch (e: IOException) {
-            // Handle exceptions here
+            return null
         }
         return tContents
     }
