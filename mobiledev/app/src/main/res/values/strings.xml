@@ -5,6 +5,7 @@
     <string name="show_toast_button">Toast</string>
     <string name="switch_text">Change label color</string>
     <string name="number_stub">1</string>
+    <string name="icon_stub">o</string>
     <string name="nat">Nat</string>
     <string name="fib">Fib</string>
     <string name="col">Col</string>

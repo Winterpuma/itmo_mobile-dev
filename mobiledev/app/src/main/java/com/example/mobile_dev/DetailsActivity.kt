@@ -37,9 +37,7 @@ class DetailsActivity : AppCompatActivity() {
         val descr: TextView = findViewById(R.id.textView_descr)
         descr.text = descrtiption
 
-        val img: ImageView = findViewById(R.id.imageView)
-        val path = "@drawable/$imgPath"
-        img.setImageResource(resources.getIdentifier(path, null, packageName))
+        setImg()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -53,6 +51,8 @@ class DetailsActivity : AppCompatActivity() {
 
         title.text = name
         descr.text = descrtiption
+
+        setImg()
     }
 
     private fun saveNumbers() {
@@ -100,7 +100,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun readJsonCatData(catName: String) {
-        val text = LoadData("catData.json")
+        val text = loadData("catData.json")
         val ob = JSONObject(text)
         val cat = ob.getJSONObject(catName)
 
@@ -108,7 +108,7 @@ class DetailsActivity : AppCompatActivity() {
         imgPath = cat.getString("img")
     }
 
-    private fun LoadData(inFile: String?): String? {
+    private fun loadData(inFile: String?): String? {
         var tContents: String? = ""
         try {
             val stream: InputStream = assets.open(inFile!!)
@@ -121,5 +121,10 @@ class DetailsActivity : AppCompatActivity() {
             // Handle exceptions here
         }
         return tContents
+    }
+
+    private fun setImg() {
+        val img: ImageView = findViewById(R.id.imageView)
+        img.setImageResource(resources.getIdentifier("@drawable/$imgPath", null, packageName))
     }
 }
