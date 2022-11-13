@@ -16,8 +16,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        setCounter()
+        setButtons()
+    }
 
+    private fun setButtons() {
         val button1:Button = findViewById(R.id.button1)
         val button2:Button = findViewById(R.id.button2)
         val button3:Button = findViewById(R.id.button3)
@@ -28,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         }
         button2.setOnClickListener { showToast("In second") }
         button3.setOnClickListener { showToast("In third") }
+    }
+
+    private fun setCounter() {
+        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
 
         val numberText:TextView = findViewById(R.id.textView_counter)
         val buttonPlus:Button = findViewById(R.id.buttonPlus)

@@ -3,18 +3,16 @@ package com.example.mobile_dev
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
-import java.io.File
 import java.io.IOException
 import java.io.InputStream
-import java.util.*
+
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -84,14 +82,13 @@ class DetailsActivity : AppCompatActivity() {
     private fun init() {
         setContentView(R.layout.details)
 
-        val button_nat: Button = findViewById(R.id.button_nat)
-        val button_fib: Button = findViewById(R.id.button_fib)
-        val button_col: Button = findViewById(R.id.button_col)
+        val buttonNat: Button = findViewById(R.id.button_nat)
+        val buttonFib: Button = findViewById(R.id.button_fib)
+        val buttonCol: Button = findViewById(R.id.button_col)
 
-        button_nat.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_nat), 1) }
-        button_fib.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_fib), 2)  }
-        button_col.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_col), 3)  }
-
+        buttonNat.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_nat), 1) }
+        buttonFib.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_fib), 2)  }
+        buttonCol.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_col), 3)  }
     }
 
     private fun addNumberToLabel(label : TextView, increment : Int) {
@@ -101,12 +98,12 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun readJsonCatData(catName: String) {
-        val lang = resources.configuration.locale.language
-        var text = loadData("catData-$lang.json")
-
-        if (text == null)
-            text = loadData("catData.json")
-
+        val lang: String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            resources.configuration.locales.get(0).language
+        } else {
+            resources.configuration.locale.language
+        }
+        val text: String = loadData("catData-$lang.json") ?: loadData("catData.json")!!
         val ob = JSONObject(text)
         val cat = ob.getJSONObject(catName)
 
@@ -114,10 +111,10 @@ class DetailsActivity : AppCompatActivity() {
         imgPath = cat.getString("img")
     }
 
-    private fun loadData(inFile: String?): String? {
-        var tContents: String? = ""
+    private fun loadData(inFile: String): String? {
+        val tContents: String?
         try {
-            val stream: InputStream = assets.open(inFile!!)
+            val stream: InputStream = assets.open(inFile)
             val size: Int = stream.available()
             val buffer = ByteArray(size)
             stream.read(buffer)
