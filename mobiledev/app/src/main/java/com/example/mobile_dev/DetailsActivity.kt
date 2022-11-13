@@ -3,40 +3,28 @@ package com.example.mobile_dev
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import org.json.JSONObject
-import java.io.IOException
-import java.io.InputStream
 
 
 class DetailsActivity : AppCompatActivity() {
 
-    private var name: String = "cat name"
-    private var descrtiption: String = "descr"
-    private var imgPath: String = "pic1.json"
+    private var cat: Cat? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
 
-        val title: TextView = findViewById(R.id.textView_title)
         val catName = intent.getStringExtra("name")
 
         if (catName != null) {
-            name = catName
-            title.text = name
-            readJsonCatData(name)
+            cat = JsonHelper().readJsonCatData(catName, assets, resources.configuration)
         }
 
-        val descr: TextView = findViewById(R.id.textView_descr)
-        descr.text = descrtiption
-
-        setImg()
+        setCatFields(cat!!)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -44,12 +32,15 @@ class DetailsActivity : AppCompatActivity() {
         saveNumbers()
         init()
         getNumbers()
+        setCatFields(cat!!)
+    }
 
+    private fun setCatFields(cat: Cat) {
         val title: TextView = findViewById(R.id.textView_title)
         val descr: TextView = findViewById(R.id.textView_descr)
 
-        title.text = name
-        descr.text = descrtiption
+        title.text = cat.name
+        descr.text = cat.descrtiption
 
         setImg()
     }
@@ -97,37 +88,9 @@ class DetailsActivity : AppCompatActivity() {
         label.text = cur.toString()
     }
 
-    private fun readJsonCatData(catName: String) {
-        val lang: String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            resources.configuration.locales.get(0).language
-        } else {
-            resources.configuration.locale.language
-        }
-        val text: String = loadData("catData-$lang.json") ?: loadData("catData.json")!!
-        val ob = JSONObject(text)
-        val cat = ob.getJSONObject(catName)
-
-        descrtiption = cat.getString("description")
-        imgPath = cat.getString("img")
-    }
-
-    private fun loadData(inFile: String): String? {
-        val tContents: String?
-        try {
-            val stream: InputStream = assets.open(inFile)
-            val size: Int = stream.available()
-            val buffer = ByteArray(size)
-            stream.read(buffer)
-            stream.close()
-            tContents = String(buffer)
-        } catch (e: IOException) {
-            return null
-        }
-        return tContents
-    }
-
     private fun setImg() {
         val img: ImageView = findViewById(R.id.imageView)
+        val imgPath = cat?.imgPath
         img.setImageResource(resources.getIdentifier("@drawable/$imgPath", null, packageName))
     }
 }
