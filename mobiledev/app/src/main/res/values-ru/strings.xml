@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">mobile-dev</string>
+    <string name="first_button">1</string>
+    <string name="second_button">2</string>
+    <string name="third_button">3</string>
+    <string name="minus_points">-</string>
+    <string name="plus_points">+</string>
     <string name="regular_label">Текст обычного размера</string>
     <string name="hide_list_button">Спрятать</string>
     <string name="show_toast_button">Тост</string>
@@ -10,6 +15,8 @@
     <string name="fib">Фиб</string>
     <string name="col">Кол</string>
     <string name="description_stub">Абвг Деежзззз eoheoheohseoh osfe hohsefohofse he ohsfoheoh sfoehefoh</string>
+    <string name="cats_content_description">cat picture</string>
+    <string name="textview_stub">TextView</string>
     <string-array name="cat_names">
         <item>Рыжик</item>
         <item>Барсик</item>

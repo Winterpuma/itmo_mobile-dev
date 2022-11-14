@@ -8,6 +8,7 @@ import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 
 class FirstActivity : AppCompatActivity() {
@@ -51,7 +52,7 @@ class FirstActivity : AppCompatActivity() {
     private fun setButtonsListeners() {
         val buttonToast: Button = findViewById(R.id.button_toast)
         val buttonChangeLabel: Button = findViewById(R.id.button_set_label)
-        val switchColor: Switch = findViewById(R.id.switch_color)
+        val switchColor: SwitchMaterial = findViewById(R.id.switch_color)
 
         buttonToast.setOnClickListener {
             Log.i(tag,"Button Toast pressed")

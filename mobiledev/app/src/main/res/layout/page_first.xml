@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,13 +14,15 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:layout_margin="20dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            tools:ignore="NestedWeights">
 
 
             <ImageView
@@ -29,14 +30,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="272dp"
                 android:scaleType="fitXY"
-                tools:src="@drawable/pic1" />
+                tools:src="@drawable/pic1"
+                android:contentDescription="@string/cats_content_description" />
 
             <ImageView
                 android:id="@+id/image2"
                 android:layout_width="62dp"
                 android:layout_height="73dp"
                 android:layout_gravity="end|top"
-                tools:src="@drawable/pic2" />
+                tools:src="@drawable/pic2"
+                android:contentDescription="@string/cats_content_description" />
 
             <ImageView
                 android:id="@+id/image3"
@@ -44,7 +47,8 @@
                 android:layout_height="91dp"
                 tools:src="@drawable/pic3"
                 android:layout_gravity="start|bottom"
-                android:paddingBottom="40dp"/>
+                android:paddingBottom="40dp"
+                android:contentDescription="@string/cats_content_description" />
         </FrameLayout>
 
 
@@ -52,13 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            </LinearLayout>
 
             <ListView
                 android:id="@+id/listView"
@@ -85,7 +82,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
-        android:gravity="center" />
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="textNoSuggestions"
+        tools:ignore="LabelFor" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switch_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/switch_text"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <com.google.android.material.divider.MaterialDivider
@@ -126,7 +126,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="5"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="NestedWeights">
 
             <Button
                 android:id="@+id/button_hide"
@@ -159,7 +160,7 @@
             android:layout_weight="2"
             android:background="@drawable/roundedbutton"
             android:rotation="-30"
-            android:text="M" />
+            android:text="@string/number_stub" />
 
     </LinearLayout>
 
