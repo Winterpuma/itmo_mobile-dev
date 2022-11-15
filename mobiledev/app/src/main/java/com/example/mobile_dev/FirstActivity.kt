@@ -3,6 +3,7 @@ package com.example.mobile_dev
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
@@ -43,7 +44,10 @@ class FirstActivity : AppCompatActivity() {
 
         buttonHide.setOnClickListener {
             Log.i(TAG,"Button Hide pressed")
-            listView.isVisible = !listView.isVisible
+            if (listView.visibility == View.INVISIBLE)
+                listView.visibility = View.VISIBLE
+            else
+                listView.visibility = View.INVISIBLE
         }
     }
 

@@ -90,7 +90,9 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun setImg() {
         val img: ImageView = findViewById(R.id.imageView)
+        val imgSmall: ImageView = findViewById(R.id.imageView_small)
         val imgPath = cat?.imgPath
         img.setImageResource(resources.getIdentifier("@drawable/$imgPath", null, packageName))
+        imgSmall.setImageResource(resources.getIdentifier("@drawable/$imgPath", null, packageName))
     }
 }
