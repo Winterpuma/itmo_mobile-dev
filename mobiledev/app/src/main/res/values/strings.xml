@@ -10,6 +10,7 @@
     <string name="show_toast_button">Toast</string>
     <string name="switch_text">Change label color</string>
     <string name="number_stub">1</string>
+    <string name="number_zero">0</string>
     <string name="icon_stub">o</string>
     <string name="nat">Nat</string>
     <string name="fib">Fib</string>
@@ -23,4 +24,7 @@
         <item>Lucy</item>
         <item>Kitty</item>
     </string-array>
+    <string name="run">Run</string>
+    <string name="stop">Stop</string>
+    <string name="reset">Reset</string>
 </resources>

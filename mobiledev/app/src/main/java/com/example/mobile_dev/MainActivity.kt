@@ -29,7 +29,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, FirstActivity::class.java)
             startActivity(intent)
         }
-        button2.setOnClickListener { showToast("In second") }
+        button2.setOnClickListener {
+            val intent = Intent(this@MainActivity, SecondActivity::class.java)
+            startActivity(intent)
+        }
         button3.setOnClickListener { showToast("In third") }
     }
 

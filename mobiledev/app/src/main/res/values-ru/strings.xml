@@ -10,6 +10,7 @@
     <string name="show_toast_button">Тост</string>
     <string name="switch_text">Изменить цвет текста</string>
     <string name="number_stub">1</string>
+    <string name="number_zero">0</string>
     <string name="icon_stub">o</string>
     <string name="nat">Нат</string>
     <string name="fib">Фиб</string>
@@ -23,4 +24,7 @@
         <item>Мурзик</item>
         <item>Мурка</item>
     </string-array>
+    <string name="run">Запустить</string>
+    <string name="stop">Остановить</string>
+    <string name="reset">Перезапустить</string>
 </resources>
