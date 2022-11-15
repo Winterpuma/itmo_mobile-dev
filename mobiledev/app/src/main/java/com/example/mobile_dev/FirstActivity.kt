@@ -13,8 +13,6 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 
 class FirstActivity : AppCompatActivity() {
 
-    private val tag = "myLogs"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.page_first)
@@ -39,12 +37,12 @@ class FirstActivity : AppCompatActivity() {
             val entry = parent.adapter.getItem(position)
             val intent = Intent(this@FirstActivity, DetailsActivity::class.java)
             val message: String = entry.toString()
-            intent.putExtra("name", message)
+            intent.putExtra(INTENT_CAT_NAME, message)
             startActivity(intent)
         }
 
         buttonHide.setOnClickListener {
-            Log.i(tag,"Button Hide pressed")
+            Log.i(TAG,"Button Hide pressed")
             listView.isVisible = !listView.isVisible
         }
     }
@@ -55,7 +53,7 @@ class FirstActivity : AppCompatActivity() {
         val switchColor: SwitchMaterial = findViewById(R.id.switch_color)
 
         buttonToast.setOnClickListener {
-            Log.i(tag,"Button Toast pressed")
+            Log.i(TAG,"Button Toast pressed")
             Toast.makeText(applicationContext, "Toast yes!", Toast.LENGTH_SHORT).show()
         }
 

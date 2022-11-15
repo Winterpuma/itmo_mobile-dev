@@ -34,19 +34,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setCounter() {
-        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        val sharedPreference = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
 
         val numberText:TextView = findViewById(R.id.textView_counter)
         val buttonPlus:Button = findViewById(R.id.buttonPlus)
         val buttonMinus:Button = findViewById(R.id.buttonMinus)
 
-        numberText.text = sharedPreference.getString("grade", "0")
+        numberText.text = sharedPreference.getString(GRADE_PREF, "0")
 
         buttonPlus.setOnClickListener {
             var cur = numberText.text.toString().toInt()
             cur++
             numberText.text = cur.toString()
-            sharedPreference.edit().putString("grade", cur.toString()).apply()
+            sharedPreference.edit().putString(GRADE_PREF, cur.toString()).apply()
         }
 
         buttonMinus.setOnClickListener {
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             {
                 cur--
                 numberText.text = cur.toString()
-                sharedPreference.edit().putString("grade", cur.toString()).apply()
+                sharedPreference.edit().putString(GRADE_PREF, cur.toString()).apply()
             }
         }
     }

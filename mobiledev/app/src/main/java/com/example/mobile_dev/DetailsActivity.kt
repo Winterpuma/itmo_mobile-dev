@@ -18,7 +18,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         init()
 
-        val catName = intent.getStringExtra("name")
+        val catName = intent.getStringExtra(INTENT_CAT_NAME)
 
         if (catName != null) {
             cat = JsonHelper().readJsonCatData(catName, assets, resources.configuration)
@@ -46,7 +46,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun saveNumbers() {
-        val settings: SharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val settings: SharedPreferences = getSharedPreferences(SHARED_PREF_NUMBERS, Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = settings.edit()
 
         editor.putString(NAT_VALUE, findViewById<TextView>(R.id.textView_nat).text.toString())
@@ -57,7 +57,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun getNumbers() {
-        val settings: SharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val settings: SharedPreferences = getSharedPreferences(SHARED_PREF_NUMBERS, Context.MODE_PRIVATE)
 
         findViewById<TextView>(R.id.textView_nat).text = settings.getString(NAT_VALUE, "1")
         findViewById<TextView>(R.id.textView_fib).text = settings.getString(FIB_VALUE, "1")
