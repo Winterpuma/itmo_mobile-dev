@@ -1,6 +1,5 @@
 package com.example.mobile_dev
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -20,6 +19,11 @@ class SecondActivity : AppCompatActivity() {
         setButtons()
     }
 
+    override fun onPause() {
+        super.onPause()
+        stopThreads()
+    }
+
     private fun setButtons() {
         val buttonRun: Button = findViewById(R.id.button_run)
         val buttonStop: Button = findViewById(R.id.button_stop)
@@ -29,40 +33,17 @@ class SecondActivity : AppCompatActivity() {
         val textView2: TextView = findViewById(R.id.textView_thread2)
 
         buttonRun.setOnClickListener {
-            run1.set(true)
-            run2.set(true)
-
-            thread {
-                while (run1.get()) {
-                    runOnUiThread {
-                        textView1.text = addToNumber(textView1.text.toString(), 50)
-                    }
-                    Thread.sleep(1000)
-                }
-            }
-
-            thread {
-                while (run2.get()) {
-                    runOnUiThread {
-                        textView2.text = addToNumber(textView2.text.toString(), 1)
-                    }
-                    Thread.sleep(100)
-                }
-            }
+            runThreadIfNotActive(run1, textView1, 50, 1000)
+            runThreadIfNotActive(run2, textView2, 1, 100)
         }
 
-        buttonStop.setOnClickListener {
-            run1.compareAndSet(true, false)
-            run2.compareAndSet(true, false)
-        }
+        buttonStop.setOnClickListener { stopThreads() }
 
         buttonReset.setOnClickListener {
-            run1.compareAndSet(true, false)
-            run2.compareAndSet(true, false)
+            stopThreads()
 
             textView1.text = "0"
             textView2.text = "0"
-
         }
     }
 
@@ -70,5 +51,24 @@ class SecondActivity : AppCompatActivity() {
         var cur = string.toInt()
         cur += number
         return cur.toString()
+    }
+
+    private fun stopThreads() {
+        run1.compareAndSet(true, false)
+        run2.compareAndSet(true, false)
+    }
+
+    private fun runThreadIfNotActive(boolean: AtomicBoolean, textView: TextView, increment: Int, sleep: Long) {
+        if (!boolean.get()) {
+            boolean.set(true)
+            thread {
+                while (boolean.get()) {
+                    runOnUiThread {
+                        textView.text = addToNumber(textView.text.toString(), increment)
+                    }
+                    Thread.sleep(sleep)
+                }
+            }
+        }
     }
 }
