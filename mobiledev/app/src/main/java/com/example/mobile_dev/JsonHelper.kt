@@ -23,7 +23,7 @@ class JsonHelper {
 
         return Cat(
             name = catName,
-            descrtiption = cat.getString("description"),
+            description = cat.getString("description"),
             imgPath = cat.getString("img"))
     }
 

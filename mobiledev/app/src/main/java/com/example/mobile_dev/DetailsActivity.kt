@@ -14,6 +14,12 @@ class DetailsActivity : AppCompatActivity() {
 
     private var cat: Cat? = null
 
+    companion object {
+        const val NAT_VALUE = "nat"
+        const val FIB_VALUE = "fib"
+        const val COL_VALUE = "col"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -40,7 +46,7 @@ class DetailsActivity : AppCompatActivity() {
         val descr: TextView = findViewById(R.id.textView_descr)
 
         title.text = cat.name
-        descr.text = cat.descrtiption
+        descr.text = cat.description
 
         setImg()
     }
@@ -64,12 +70,6 @@ class DetailsActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textView_col).text = settings.getString(COL_VALUE, "1")
     }
 
-    companion object {
-        const val NAT_VALUE = "nat"
-        const val FIB_VALUE = "fib"
-        const val COL_VALUE = "col"
-    }
-
     private fun init() {
         setContentView(R.layout.details)
 
@@ -77,6 +77,7 @@ class DetailsActivity : AppCompatActivity() {
         val buttonFib: Button = findViewById(R.id.button_fib)
         val buttonCol: Button = findViewById(R.id.button_col)
 
+        // TODO последовательности, подсчет в отдельных классах, общий интерфейс
         buttonNat.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_nat), 1) }
         buttonFib.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_fib), 2)  }
         buttonCol.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_col), 3)  }
