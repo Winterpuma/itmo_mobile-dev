@@ -4,15 +4,20 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mobile_dev.numbers.Collatz
+import com.example.mobile_dev.numbers.Fibonacci
+import com.example.mobile_dev.numbers.Natural
+import com.example.mobile_dev.numbers.ViewNumberHelper
 
 
 class DetailsActivity : AppCompatActivity() {
 
     private var cat: Cat? = null
+    private val numHelpers = mutableListOf<ViewNumberHelper>()
+
 
     companion object {
         const val NAT_VALUE = "nat"
@@ -55,9 +60,7 @@ class DetailsActivity : AppCompatActivity() {
         val settings: SharedPreferences = getSharedPreferences(SHARED_PREF_NUMBERS, Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = settings.edit()
 
-        editor.putString(NAT_VALUE, findViewById<TextView>(R.id.textView_nat).text.toString())
-        editor.putString(FIB_VALUE, findViewById<TextView>(R.id.textView_fib).text.toString())
-        editor.putString(COL_VALUE, findViewById<TextView>(R.id.textView_col).text.toString())
+        numHelpers.forEach { it.saveNumber(editor) }
 
         editor.apply()
     }
@@ -65,28 +68,18 @@ class DetailsActivity : AppCompatActivity() {
     private fun getNumbers() {
         val settings: SharedPreferences = getSharedPreferences(SHARED_PREF_NUMBERS, Context.MODE_PRIVATE)
 
-        findViewById<TextView>(R.id.textView_nat).text = settings.getString(NAT_VALUE, "1")
-        findViewById<TextView>(R.id.textView_fib).text = settings.getString(FIB_VALUE, "1")
-        findViewById<TextView>(R.id.textView_col).text = settings.getString(COL_VALUE, "1")
+        numHelpers.forEach { it.setNumberFromSettings(settings) }
     }
 
     private fun init() {
         setContentView(R.layout.details)
 
-        val buttonNat: Button = findViewById(R.id.button_nat)
-        val buttonFib: Button = findViewById(R.id.button_fib)
-        val buttonCol: Button = findViewById(R.id.button_col)
-
-        // TODO последовательности, подсчет в отдельных классах, общий интерфейс
-        buttonNat.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_nat), 1) }
-        buttonFib.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_fib), 2)  }
-        buttonCol.setOnClickListener { addNumberToLabel(findViewById(R.id.textView_col), 3)  }
-    }
-
-    private fun addNumberToLabel(label : TextView, increment : Int) {
-        var cur = label.text.toString().toInt()
-        cur += increment
-        label.text = cur.toString()
+        numHelpers.add(
+            ViewNumberHelper(Natural(), findViewById(R.id.textView_nat), findViewById(R.id.button_nat), NAT_VALUE))
+        numHelpers.add(
+            ViewNumberHelper(Fibonacci(), findViewById(R.id.textView_fib), findViewById(R.id.button_fib), FIB_VALUE))
+        numHelpers.add(
+            ViewNumberHelper(Collatz(), findViewById(R.id.textView_col), findViewById(R.id.button_col), COL_VALUE))
     }
 
     private fun setImg() {
