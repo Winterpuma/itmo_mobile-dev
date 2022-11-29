@@ -1,4 +1,4 @@
-package com.example.mobile_dev.numbers
+package com.example.mobile_dev.lab1.numbers
 
 import android.content.SharedPreferences
 import android.widget.Button

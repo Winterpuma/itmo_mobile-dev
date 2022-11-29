@@ -24,15 +24,15 @@
         </activity>
 
         <activity
-            android:name=".FirstActivity"
+            android:name=".lab1.FirstActivity"
             android:exported="true"/>
 
         <activity
-            android:name=".SecondActivity"
+            android:name=".lab2.SecondActivity"
             android:exported="true"/>
 
         <activity
-            android:name=".DetailsActivity"
+            android:name=".lab1.DetailsActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize|keyboardHidden" />
 

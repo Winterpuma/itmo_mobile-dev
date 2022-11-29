@@ -3,6 +3,7 @@ package com.example.mobile_dev
 import android.content.res.AssetManager
 import android.content.res.Configuration
 import android.os.Build
+import com.example.mobile_dev.lab1.Cat
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream

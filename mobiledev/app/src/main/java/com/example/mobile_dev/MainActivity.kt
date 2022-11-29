@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mobile_dev.lab1.FirstActivity
+import com.example.mobile_dev.lab2.SecondActivity
 
 
 class MainActivity : AppCompatActivity() {

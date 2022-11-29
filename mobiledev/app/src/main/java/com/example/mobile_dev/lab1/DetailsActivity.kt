@@ -1,4 +1,4 @@
-package com.example.mobile_dev
+package com.example.mobile_dev.lab1
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,10 +7,11 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mobile_dev.numbers.Collatz
-import com.example.mobile_dev.numbers.Fibonacci
-import com.example.mobile_dev.numbers.Natural
-import com.example.mobile_dev.numbers.ViewNumberHelper
+import com.example.mobile_dev.*
+import com.example.mobile_dev.lab1.numbers.Collatz
+import com.example.mobile_dev.lab1.numbers.Fibonacci
+import com.example.mobile_dev.lab1.numbers.Natural
+import com.example.mobile_dev.lab1.numbers.ViewNumberHelper
 
 
 class DetailsActivity : AppCompatActivity() {

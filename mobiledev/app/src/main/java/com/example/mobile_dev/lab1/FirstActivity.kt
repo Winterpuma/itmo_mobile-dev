@@ -1,4 +1,4 @@
-package com.example.mobile_dev
+package com.example.mobile_dev.lab1
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,9 @@ import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.isVisible
+import com.example.mobile_dev.INTENT_CAT_NAME
+import com.example.mobile_dev.R
+import com.example.mobile_dev.TAG
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 

@@ -1,9 +1,10 @@
-package com.example.mobile_dev
+package com.example.mobile_dev.lab2
 
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mobile_dev.R
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.concurrent.thread
 

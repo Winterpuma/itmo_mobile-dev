@@ -1,4 +1,4 @@
-package com.example.mobile_dev.numbers
+package com.example.mobile_dev.lab1.numbers
 
 class Collatz(a: Int = 3) : ISequence {
 
