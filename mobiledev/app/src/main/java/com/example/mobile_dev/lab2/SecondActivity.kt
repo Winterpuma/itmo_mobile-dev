@@ -59,11 +59,11 @@ class SecondActivity : AppCompatActivity() {
         run2.compareAndSet(true, false)
     }
 
-    private fun runThreadIfNotActive(boolean: AtomicBoolean, textView: TextView, increment: Int, sleep: Long) {
-        if (!boolean.get()) {
-            boolean.set(true)
+    private fun runThreadIfNotActive(runFlag: AtomicBoolean, textView: TextView, increment: Int, sleep: Long) {
+        if (!runFlag.get()) {
+            runFlag.set(true)
             thread {
-                while (boolean.get()) {
+                while (runFlag.get()) {
                     runOnUiThread {
                         textView.text = addToNumber(textView.text.toString(), increment)
                     }
