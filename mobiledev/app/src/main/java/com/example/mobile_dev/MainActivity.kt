@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobile_dev.lab1.FirstActivity
 import com.example.mobile_dev.lab2.SecondActivity
+import com.example.mobile_dev.lab3.ThirdActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +36,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, SecondActivity::class.java)
             startActivity(intent)
         }
-        button3.setOnClickListener { showToast("In third") }
+        button3.setOnClickListener {
+            val intent = Intent(this@MainActivity, ThirdActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setCounter() {
@@ -64,9 +68,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun showToast(str : String) {
-        Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
-    }
-
 }

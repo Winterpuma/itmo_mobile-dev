@@ -27,4 +27,12 @@
     <string name="run">Запустить</string>
     <string name="stop">Остановить</string>
     <string name="reset">Перезапустить</string>
+
+    <string name="signIn">Вход</string>
+    <string name="signup">Регистрация</string>
+    <string name="id">id:</string>
+    <string name="money">Баланс:</string>
+    <string name="luck">Удача</string>
+    <string name="withdraw">-</string>
+    <string name="deposit">+</string>
 </resources>

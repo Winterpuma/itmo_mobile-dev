@@ -27,4 +27,12 @@
     <string name="run">Run</string>
     <string name="stop">Stop</string>
     <string name="reset">Reset</string>
+
+    <string name="signIn">Login</string>
+    <string name="signup">SignUp</string>
+    <string name="id">id:</string>
+    <string name="money">Money:</string>
+    <string name="luck">Lucky</string>
+    <string name="withdraw">-</string>
+    <string name="deposit">+</string>
 </resources>

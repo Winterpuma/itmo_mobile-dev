@@ -32,6 +32,13 @@
             android:exported="true"/>
 
         <activity
+            android:name=".lab3.ThirdActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".lab3.ProfileActivity"
+            android:exported="true"/>
+
+        <activity
             android:name=".lab1.DetailsActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize|keyboardHidden" />
