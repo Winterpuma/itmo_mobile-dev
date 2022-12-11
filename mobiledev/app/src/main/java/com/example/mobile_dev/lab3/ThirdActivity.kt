@@ -11,8 +11,9 @@ class ThirdActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.page_third_login)
-
         setButtons()
+        val user = Requests().getUser(100)
+        println(user)
     }
 
     private fun setButtons() {
