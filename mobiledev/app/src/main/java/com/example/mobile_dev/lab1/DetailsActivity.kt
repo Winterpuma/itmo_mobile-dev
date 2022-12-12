@@ -1,7 +1,5 @@
 package com.example.mobile_dev.lab1
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.ImageView
@@ -17,7 +15,7 @@ import com.example.mobile_dev.lab1.numbers.ViewNumberHelper
 class DetailsActivity : AppCompatActivity() {
 
     private var cat: Cat? = null
-    private val numHelpers = mutableListOf<ViewNumberHelper>()
+    private val numHelpers = mutableMapOf<String, ViewNumberHelper>()
 
 
     companion object {
@@ -41,9 +39,10 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        saveNumbers()
-        init()
-        getNumbers()
+        setContentView(R.layout.details)
+        numHelpers[NAT_VALUE]?.restoreView(findViewById(R.id.textView_nat), findViewById(R.id.button_nat))
+        numHelpers[FIB_VALUE]?.restoreView(findViewById(R.id.textView_fib), findViewById(R.id.button_fib))
+        numHelpers[COL_VALUE]?.restoreView(findViewById(R.id.textView_col), findViewById(R.id.button_col))
         setCatFields(cat!!)
     }
 
@@ -57,30 +56,15 @@ class DetailsActivity : AppCompatActivity() {
         setImg()
     }
 
-    private fun saveNumbers() {
-        val settings: SharedPreferences = getSharedPreferences(SHARED_PREF_NUMBERS, Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = settings.edit()
-
-        numHelpers.forEach { it.saveNumber(editor) }
-
-        editor.apply()
-    }
-
-    private fun getNumbers() {
-        val settings: SharedPreferences = getSharedPreferences(SHARED_PREF_NUMBERS, Context.MODE_PRIVATE)
-
-        numHelpers.forEach { it.setNumberFromSettings(settings) }
-    }
-
     private fun init() {
         setContentView(R.layout.details)
 
-        numHelpers.add(
-            ViewNumberHelper(Natural(), findViewById(R.id.textView_nat), findViewById(R.id.button_nat), NAT_VALUE))
-        numHelpers.add(
-            ViewNumberHelper(Fibonacci(), findViewById(R.id.textView_fib), findViewById(R.id.button_fib), FIB_VALUE))
-        numHelpers.add(
-            ViewNumberHelper(Collatz(), findViewById(R.id.textView_col), findViewById(R.id.button_col), COL_VALUE))
+        numHelpers[NAT_VALUE] =
+            ViewNumberHelper(Natural(), findViewById(R.id.textView_nat), findViewById(R.id.button_nat))
+        numHelpers[FIB_VALUE] =
+            ViewNumberHelper(Fibonacci(), findViewById(R.id.textView_fib), findViewById(R.id.button_fib))
+        numHelpers[COL_VALUE] =
+            ViewNumberHelper(Collatz(), findViewById(R.id.textView_col), findViewById(R.id.button_col))
     }
 
     private fun setImg() {
