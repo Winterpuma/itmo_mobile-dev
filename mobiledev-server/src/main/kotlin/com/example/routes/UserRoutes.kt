@@ -35,9 +35,9 @@ fun Route.userRouting() {
         }
 
         post {
-            val customer = call.receive<User>()
-            userStorage.add(customer)
-            call.respondText("User stored correctly", status = HttpStatusCode.Created)
+            val user = User(userId++, 0)
+            userStorage.add(user)
+            call.respond(user)
         }
 
         delete("{id?}") {
