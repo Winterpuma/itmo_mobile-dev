@@ -8,9 +8,14 @@ import io.ktor.server.routing.*
 
 fun Route.transactionRouting() {
     get("/transaction") {
-        if (transactionStorage.isNotEmpty()) {
-            call.respond(transactionStorage)
+        val id = getUserId(call.request.queryParameters)
+
+        if (id != null) {
+            val res = transactionStorage.filter { it.userId == id }
+            call.respond(res)
         }
+        
+        call.respond(transactionStorage)
     }
 
     get("/transaction/withdraw") {
@@ -22,4 +27,8 @@ fun Route.transactionRouting() {
         val res = transactionStorage.filter { it.moneyDif > 0 }
         call.respond(res)
     }
+}
+
+private fun getUserId(parameters: Parameters): Int? {
+    return parameters["userid"]?.toInt()
 }

@@ -22,7 +22,7 @@ fun Route.userRouting() {
         }
 
         get("{id?}") {
-            val id = call.parameters["id"] ?: return@get call.respondText(
+            val id = getId(call.parameters) ?: return@get call.respondText(
                 "Missing id",
                 status = HttpStatusCode.BadRequest
             )
@@ -41,7 +41,7 @@ fun Route.userRouting() {
         }
 
         delete("{id?}") {
-            val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
+            val id = getId(call.parameters) ?: return@delete call.respond(HttpStatusCode.BadRequest)
             if (userStorage.removeIf { it.id == id }) {
                 call.respondText("User removed correctly", status = HttpStatusCode.Accepted)
             } else {
@@ -54,7 +54,7 @@ fun Route.userRouting() {
 fun Route.userMoneyRouting() {
     route("/user/{id}") {
         put("add/{money}") {
-            val id = call.parameters["id"] ?: return@put call.respond(HttpStatusCode.BadRequest)
+            val id = getId(call.parameters) ?: return@put call.respond(HttpStatusCode.BadRequest)
             val money = call.parameters["money"] ?: return@put call.respond(HttpStatusCode.BadRequest)
             val user =
                 userStorage.find { it.id == id } ?: return@put call.respondText(
@@ -69,7 +69,7 @@ fun Route.userMoneyRouting() {
         }
 
         put("withdraw/{money}") {
-            val id = call.parameters["id"] ?: return@put call.respond(HttpStatusCode.BadRequest)
+            val id = getId(call.parameters) ?: return@put call.respond(HttpStatusCode.BadRequest)
             val moneyToWithdraw = call.parameters["money"]?.toInt() ?: return@put call.respond(HttpStatusCode.BadRequest)
             val user =
                 userStorage.find { it.id == id } ?: return@put call.respondText(
@@ -90,7 +90,7 @@ fun Route.userMoneyRouting() {
         }
 
         put("lucky") {
-            val id = call.parameters["id"] ?: return@put call.respond(HttpStatusCode.BadRequest)
+            val id = getId(call.parameters) ?: return@put call.respond(HttpStatusCode.BadRequest)
             val user =
                 userStorage.find { it.id == id } ?: return@put call.respondText(
                     "No user with id $id",
@@ -111,4 +111,8 @@ fun Route.userMoneyRouting() {
             call.respond(user)
         }
     }
+}
+
+private fun getId(parameters: Parameters): Int? {
+    return parameters["id"]?.toInt()
 }
