@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.10'
 }
 
 android {
@@ -44,4 +45,7 @@ dependencies {
     implementation("io.ktor:ktor-client-core:2.2.1")
     implementation("io.ktor:ktor-client-android:2.2.1")
     implementation("io.ktor:ktor-client-logging:2.2.1")
+
+    implementation("io.ktor:ktor-client-content-negotiation:2.2.1")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.1")
 }
