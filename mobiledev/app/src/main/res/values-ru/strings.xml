@@ -35,4 +35,7 @@
     <string name="luck">Удача</string>
     <string name="withdraw">-</string>
     <string name="deposit">+</string>
+
+    <string name="err_not_valid">Введите корректный логин</string>
+    <string name="err_not_found">Пользователь не найден</string>
 </resources>

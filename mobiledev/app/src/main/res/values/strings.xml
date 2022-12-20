@@ -35,4 +35,7 @@
     <string name="luck">Lucky</string>
     <string name="withdraw">-</string>
     <string name="deposit">+</string>
+
+    <string name="err_not_valid">Please enter valid login</string>
+    <string name="err_not_found">User not found</string>
 </resources>

@@ -12,7 +12,6 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.runBlocking
-import java.util.*
 
 class Requests {
     private val basicAddress = "http://10.0.2.2:8080"
@@ -32,10 +31,15 @@ class Requests {
         }
     }
 
-    fun getUser(id: Int): User {
-        return runBlocking {
-            return@runBlocking client.get("$basicAddress/user/$id").body()
+    fun getUser(id: Int): User? {
+        val res = runBlocking {
+            return@runBlocking client.get("$basicAddress/user/$id")
         }
+
+        if (res.status == HttpStatusCode.OK)
+            return runBlocking { return@runBlocking res.body() }
+        else
+            return null
     }
 
     fun createUser(): User {

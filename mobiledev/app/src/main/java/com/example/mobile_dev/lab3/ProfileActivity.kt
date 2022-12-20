@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.mobile_dev.ERROR
 import com.example.mobile_dev.INTENT_ID
 import com.example.mobile_dev.R
+import com.example.mobile_dev.showToast
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -23,8 +24,14 @@ class ProfileActivity : AppCompatActivity() {
 
         id = intent.getIntExtra(INTENT_ID, ERROR)
         val user = Requests().getUser(id)
-        setUserId(user.id)
-        setMoney(user.money)
+
+        if (user == null) {
+            showToast("User not loaded", applicationContext)
+        }
+        else {
+            setUserId(user.id)
+            setMoney(user.money)
+        }
     }
 
     private fun setButtons() {
@@ -50,10 +57,6 @@ class ProfileActivity : AppCompatActivity() {
     private fun withdrawMoney() {
         val user = Requests().withdrawMoney(id, 100)
         setMoney(user.money)
-    }
-
-    private fun showToast(str : String) {
-        Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
     }
 
     private fun setUserId(id: Int) {
