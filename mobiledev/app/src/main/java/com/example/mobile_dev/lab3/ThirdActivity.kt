@@ -3,7 +3,10 @@ package com.example.mobile_dev.lab3
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mobile_dev.INTENT_ID
 import com.example.mobile_dev.R
 
 class ThirdActivity : AppCompatActivity() {
@@ -12,8 +15,6 @@ class ThirdActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.page_third_login)
         setButtons()
-        val user = Requests().getUser(100)
-        println(user)
     }
 
     private fun setButtons() {
@@ -25,15 +26,17 @@ class ThirdActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        // TODO: api check up with provided id
-        // TODO: send id to next page
+        val editTextId: EditText = findViewById(R.id.editText_id)
+        val user = Requests().getUser(editTextId.text.toString().toInt())
         val intent = Intent(this@ThirdActivity, ProfileActivity::class.java)
+        intent.putExtra(INTENT_ID, user.id)
         startActivity(intent)
     }
 
     private fun register() {
-        // TODO: api create new user
+        val user = Requests().createUser()
         val intent = Intent(this@ThirdActivity, ProfileActivity::class.java)
+        intent.putExtra(INTENT_ID, user.id)
         startActivity(intent)
     }
 

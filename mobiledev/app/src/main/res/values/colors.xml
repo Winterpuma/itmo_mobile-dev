@@ -9,4 +9,6 @@
     <color name="black">#FF000000</color>
     <color name="grey">#808080</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="money_inc">#00a52a</color>
+    <color name="money_dec">#f71a5b</color>
 </resources>

@@ -12,6 +12,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.runBlocking
+import java.util.*
 
 class Requests {
     private val basicAddress = "http://10.0.2.2:8080"
@@ -37,42 +38,39 @@ class Requests {
         }
     }
 
-    fun createUser(id: String, money: Int): HttpResponse {
+    fun createUser(): User {
         return runBlocking {
-            return@runBlocking client.post("$basicAddress/user") {
-                contentType(ContentType.Application.Json)
-                setBody(User(id, money))
-            }
+            return@runBlocking client.post("$basicAddress/user").body()
         }
     }
 
-    fun deleteUser(id: String): HttpResponse {
+    fun deleteUser(id: Int): HttpResponse {
         return runBlocking {
             return@runBlocking client.delete("$basicAddress/user/$id")
         }
     }
 
-    fun addMoney(id: String, amount: Int): User {
+    fun addMoney(id: Int, amount: Int): User {
         return runBlocking {
             return@runBlocking client.put("$basicAddress/user/$id/add/$amount").body()
         }
     }
 
-    fun withdrawMoney(id: String, amount: Int): User {
+    fun withdrawMoney(id: Int, amount: Int): User {
         return runBlocking {
             return@runBlocking client.put("$basicAddress/user/$id/withdraw/$amount").body()
         }
     }
 
-    fun luckyMoney(id: String, amount: Int): User {
+    fun luckyMoney(id: Int): User {
         return runBlocking {
-            return@runBlocking client.put("$basicAddress/user/$id/withdraw/$amount").body()
+            return@runBlocking client.put("$basicAddress/user/$id/lucky").body()
         }
     }
 
-    fun getAllUserTransactions(id: String): List<Transaction>{
+    fun getAllUserTransactions(id: Int): List<Transaction>{
         return runBlocking {
-            return@runBlocking client.get("$basicAddress/user/$id/transaction").body()
+            return@runBlocking client.get("$basicAddress/transaction?userid=$id").body()
         }
     }
 }
