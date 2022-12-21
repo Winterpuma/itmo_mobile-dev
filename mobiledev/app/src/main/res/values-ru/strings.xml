@@ -38,4 +38,8 @@
 
     <string name="err_not_valid">Введите корректный логин</string>
     <string name="err_not_found">Пользователь не найден</string>
+    <string name="err_not_loaded">Пользователь не загружен</string>
+    <string name="delete_user">Удалить аккаунт</string>
+    <string name="delete_user_success">Пользователь удален успешно</string>
+    <string name="error">Ошибка</string>
 </resources>

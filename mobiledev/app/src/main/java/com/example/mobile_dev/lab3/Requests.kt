@@ -66,10 +66,15 @@ class Requests {
         }
     }
 
-    fun luckyMoney(id: Int): User {
-        return runBlocking {
-            return@runBlocking client.put("$basicAddress/user/$id/lucky").body()
+    fun luckyMoney(id: Int): Pair<User?, String> {
+        val res = runBlocking {
+            return@runBlocking client.put("$basicAddress/user/$id/lucky")
         }
+        
+        if (res.status == HttpStatusCode.OK)
+            return Pair(runBlocking { return@runBlocking res.body() }, "")
+        else
+            return Pair(null, runBlocking { return@runBlocking res.body() })
     }
 
     fun getAllUserTransactions(id: Int): List<Transaction>{

@@ -1,16 +1,13 @@
 package com.example.mobile_dev.lab3
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import com.example.mobile_dev.ERROR
-import com.example.mobile_dev.INTENT_ID
-import com.example.mobile_dev.R
-import com.example.mobile_dev.showToast
+import com.example.mobile_dev.*
+import io.ktor.http.*
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -26,11 +23,12 @@ class ProfileActivity : AppCompatActivity() {
         val user = Requests().getUser(id)
 
         if (user == null) {
-            showToast("User not loaded", applicationContext)
+            showToast(getString(R.string.err_not_loaded), applicationContext)
         }
         else {
             setUserId(user.id)
             setMoney(user.money)
+            fillListView(user.id)
         }
     }
 
@@ -38,25 +36,50 @@ class ProfileActivity : AppCompatActivity() {
         val buttonLuck: Button = findViewById(R.id.button_luck)
         val buttonWithdrawMoney: Button = findViewById(R.id.button_withdrawMoney)
         val buttonAddMoney: Button = findViewById(R.id.button_addMoney)
+        val buttonDeleteUser: Button = findViewById(R.id.button_delete)
 
         buttonLuck.setOnClickListener { lucky() }
         buttonAddMoney.setOnClickListener { addMoney() }
         buttonWithdrawMoney.setOnClickListener { withdrawMoney() }
+        buttonDeleteUser.setOnClickListener { deleteUser() }
     }
 
     private fun lucky() {
-        val user = Requests().luckyMoney(id)
-        setMoney(user.money)
+        val res = Requests().luckyMoney(id)
+        val user = res.first
+        if (user == null)
+            showToast(res.second, applicationContext)
+        else {
+            setMoney(user.money)
+            fillListView(user.id)
+        }
     }
 
     private fun addMoney() {
-        val user = Requests().addMoney(id, 100)
+        val user = Requests().addMoney(id, ADD_MONEY_AMOUNT)
         setMoney(user.money)
+        fillListView(user.id)
     }
 
     private fun withdrawMoney() {
-        val user = Requests().withdrawMoney(id, 100)
+        val user = Requests().withdrawMoney(id, WITHDRAW_MONEY_AMOUNT)
         setMoney(user.money)
+        fillListView(user.id)
+    }
+
+    private fun deleteUser() {
+        val response = Requests().deleteUser(id)
+
+        if (response.status == HttpStatusCode.OK)
+        {
+            showToast(getString(R.string.delete_user_success), applicationContext)
+            val intent = Intent(this@ProfileActivity, ThirdActivity::class.java)
+            startActivity(intent)
+        }
+        else
+        {
+            showToast(getString(R.string.error), applicationContext)
+        }
     }
 
     private fun setUserId(id: Int) {
@@ -85,5 +108,16 @@ class ProfileActivity : AppCompatActivity() {
             ResourcesCompat.getColor(resources, R.color.money_dec, null)
         else
             Color.GRAY
+    }
+
+    private fun fillListView(idUser: Int) {
+        val listView: ListView = findViewById(R.id.listView_transactions)
+        val transactions = Requests().getAllUserTransactions(idUser).takeLast(10).reversed()
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1, transactions
+        )
+
+        listView.adapter = adapter
     }
 }

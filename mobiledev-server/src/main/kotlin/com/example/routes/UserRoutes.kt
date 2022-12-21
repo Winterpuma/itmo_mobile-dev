@@ -43,7 +43,7 @@ fun Route.userRouting() {
         delete("{id?}") {
             val id = getId(call.parameters) ?: return@delete call.respond(HttpStatusCode.BadRequest)
             if (userStorage.removeIf { it.id == id }) {
-                call.respondText("User removed correctly", status = HttpStatusCode.Accepted)
+                call.respondText("User removed correctly", status = HttpStatusCode.OK)
             } else {
                 call.respondText("Not Found", status = HttpStatusCode.NotFound)
             }

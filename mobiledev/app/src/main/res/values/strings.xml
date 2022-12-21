@@ -38,4 +38,8 @@
 
     <string name="err_not_valid">Please enter valid login</string>
     <string name="err_not_found">User not found</string>
+    <string name="err_not_loaded">User not loaded</string>
+    <string name="delete_user">Delete user</string>
+    <string name="delete_user_success">User deleted successfully</string>
+    <string name="error">Error</string>
 </resources>

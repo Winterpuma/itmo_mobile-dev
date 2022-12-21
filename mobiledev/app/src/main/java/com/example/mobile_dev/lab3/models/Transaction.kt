@@ -6,4 +6,6 @@ import kotlinx.serialization.Serializable
 data class Transaction(val id: String,
                        val userId: String,
                        val description: String,
-                       val moneyDif: Int)
+                       val moneyDif: Int) {
+    override fun toString(): String = "$description: $moneyDif"
+}
