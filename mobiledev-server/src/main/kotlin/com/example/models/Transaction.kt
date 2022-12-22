@@ -1,6 +1,7 @@
 package com.example.models
 
 import kotlinx.serialization.Serializable
+import org.jetbrains.exposed.sql.*
 
 @Serializable
 data class Transaction(val id: String,
@@ -8,4 +9,11 @@ data class Transaction(val id: String,
                        val description: String,
                        val moneyDif: Int)
 
-val transactionStorage = mutableListOf<Transaction>()
+object Transactions : Table() {
+    val id = uuid("id")
+    val userId = integer("userId")
+    val description = varchar("description", 128)
+    val moneyDif = integer("moneyDif")
+
+    override val primaryKey = PrimaryKey(id)
+}
