@@ -50,6 +50,16 @@ class DAOFacadeImpl : DAOFacade {
         } > 0
     }
 
+    override suspend fun allTransactions(): List<Transaction>  = dbQuery {
+        Transactions.selectAll().map(::resultRowToTransaction)
+    }
+
+    override suspend fun allUserTransactions(userId: Int): List<Transaction> = dbQuery {
+        Transactions
+            .select { Transactions.userId eq userId }
+            .map(::resultRowToTransaction)
+    }
+
     override suspend fun addTransaction(id: UUID, userId: Int, description: String, moneyDif: Int): Transaction?  = dbQuery {
         val insertStatement = Transactions.insert {
             it[Transactions.id] = id
