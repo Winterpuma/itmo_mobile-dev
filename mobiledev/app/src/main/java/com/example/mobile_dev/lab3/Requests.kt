@@ -13,7 +13,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.runBlocking
 
-class Requests {
+class Requests : IRequests {
     private val basicAddress = "http://10.0.2.2:8080"
     private val client = HttpClient(Android) {
         install(Logging) {
@@ -25,61 +25,47 @@ class Requests {
         }
     }
 
-    fun getAllUsers(): List<User>{
-        return runBlocking {
-            return@runBlocking client.get("$basicAddress/user").body()
-        }
+    override suspend fun getAllUsers(): List<User>{
+        return client.get("$basicAddress/user").body()
     }
 
-    fun getUser(id: Int): User? {
-        val res = runBlocking {
-            return@runBlocking client.get("$basicAddress/user/$id")
-        }
+    override suspend fun getUser(id: Int): User? {
+        val res = client.get("$basicAddress/user/$id")
 
         if (res.status == HttpStatusCode.OK)
-            return runBlocking { return@runBlocking res.body() }
+            return res.body()
         else
             return null
     }
 
-    fun createUser(): User {
-        return runBlocking {
-            return@runBlocking client.post("$basicAddress/user").body()
-        }
+    override suspend fun createUser(): User {
+        return client.post("$basicAddress/user").body()
     }
 
-    fun deleteUser(id: Int): HttpResponse {
-        return runBlocking {
-            return@runBlocking client.delete("$basicAddress/user/$id")
-        }
+    override suspend fun deleteUser(id: Int): HttpResponse {
+        return client.delete("$basicAddress/user/$id")
     }
 
-    fun addMoney(id: Int, amount: Int): User {
-        return runBlocking {
-            return@runBlocking client.put("$basicAddress/user/$id/add/$amount").body()
-        }
+    override suspend fun addMoney(id: Int, amount: Int): User {
+        return client.put("$basicAddress/user/$id/add/$amount").body()
     }
 
-    fun withdrawMoney(id: Int, amount: Int): User {
-        return runBlocking {
-            return@runBlocking client.put("$basicAddress/user/$id/withdraw/$amount").body()
-        }
+    override suspend fun withdrawMoney(id: Int, amount: Int): User {
+        return client.put("$basicAddress/user/$id/withdraw/$amount").body()
     }
 
-    fun luckyMoney(id: Int): Pair<User?, String> {
-        val res = runBlocking {
-            return@runBlocking client.put("$basicAddress/user/$id/lucky")
-        }
-        
+    override suspend fun luckyMoney(id: Int): Pair<User?, String> {
+        val res = client.put("$basicAddress/user/$id/lucky")
+
         if (res.status == HttpStatusCode.OK)
-            return Pair(runBlocking { return@runBlocking res.body() }, "")
+            return Pair(res.body(), "")
         else
-            return Pair(null, runBlocking { return@runBlocking res.body() })
+            return Pair(null, res.body())
     }
 
-    fun getAllUserTransactions(id: Int): List<Transaction>{
-        return runBlocking {
-            return@runBlocking client.get("$basicAddress/transaction?userid=$id").body()
-        }
+    override suspend fun getAllUserTransactions(id: Int): List<Transaction>{
+        return client.get("$basicAddress/transaction?userid=$id").body()
     }
 }
+
+val requests: IRequests = Requests()

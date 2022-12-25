@@ -8,10 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.mobile_dev.*
 import io.ktor.http.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity(), CoroutineScope {
 
     var id: Int = ERROR
+
+    var job: Job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,15 +29,16 @@ class ProfileActivity : AppCompatActivity() {
         setButtons()
 
         id = intent.getIntExtra(INTENT_ID, ERROR)
-        val user = Requests().getUser(id)
+        launch() {
+            val user = requests.getUser(id)
 
-        if (user == null) {
-            showToast(getString(R.string.err_not_loaded), applicationContext)
-        }
-        else {
-            setUserId(user.id)
-            setMoney(user.money)
-            fillListView(user.id)
+            if (user == null) {
+                showToast(getString(R.string.err_not_loaded), applicationContext)
+            } else {
+                setUserId(user.id)
+                setMoney(user.money)
+                fillListView(user.id)
+            }
         }
     }
 
@@ -45,40 +55,48 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun lucky() {
-        val res = Requests().luckyMoney(id)
-        val user = res.first
-        if (user == null)
-            showToast(res.second, applicationContext)
-        else {
+        CoroutineScope(Dispatchers.IO).launch {
+            val res = requests.luckyMoney(id)
+            CoroutineScope(Dispatchers.Main).launch {
+                val user = res.first
+                if (user == null)
+                    showToast(res.second, applicationContext)
+                else {
+                    setMoney(user.money)
+                    fillListView(user.id)
+                }
+            }
+        }
+
+    }
+
+    private fun addMoney() {
+        launch() {
+            val user = requests.addMoney(id, ADD_MONEY_AMOUNT)
             setMoney(user.money)
             fillListView(user.id)
         }
     }
 
-    private fun addMoney() {
-        val user = Requests().addMoney(id, ADD_MONEY_AMOUNT)
-        setMoney(user.money)
-        fillListView(user.id)
-    }
-
     private fun withdrawMoney() {
-        val user = Requests().withdrawMoney(id, WITHDRAW_MONEY_AMOUNT)
-        setMoney(user.money)
-        fillListView(user.id)
+        launch() {
+            val user = requests.withdrawMoney(id, WITHDRAW_MONEY_AMOUNT)
+            setMoney(user.money)
+            fillListView(user.id)
+        }
     }
 
     private fun deleteUser() {
-        val response = Requests().deleteUser(id)
+        launch() {
+            val response = requests.deleteUser(id)
 
-        if (response.status == HttpStatusCode.OK)
-        {
-            showToast(getString(R.string.delete_user_success), applicationContext)
-            val intent = Intent(this@ProfileActivity, ThirdActivity::class.java)
-            startActivity(intent)
-        }
-        else
-        {
-            showToast(getString(R.string.error), applicationContext)
+            if (response.status == HttpStatusCode.OK) {
+                showToast(getString(R.string.delete_user_success), applicationContext)
+                val intent = Intent(this@ProfileActivity, ThirdActivity::class.java)
+                startActivity(intent)
+            } else {
+                showToast(getString(R.string.error), applicationContext)
+            }
         }
     }
 
@@ -112,12 +130,20 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun fillListView(idUser: Int) {
         val listView: ListView = findViewById(R.id.listView_transactions)
-        val transactions = Requests().getAllUserTransactions(idUser).takeLast(10).reversed()
-        val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1, transactions
-        )
+        val cntxt = this
+        launch() {
+            val transactions = requests.getAllUserTransactions(idUser).takeLast(10).reversed()
+            val adapter = ArrayAdapter(
+                cntxt,
+                android.R.layout.simple_list_item_1, transactions
+            )
 
-        listView.adapter = adapter
+            listView.adapter = adapter
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
     }
 }
