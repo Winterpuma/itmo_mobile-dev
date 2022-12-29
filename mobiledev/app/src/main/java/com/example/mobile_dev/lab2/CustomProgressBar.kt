@@ -30,7 +30,7 @@ class CustomProgressBar(context: Context, attrs: AttributeSet) : View(context, a
         canvas.drawCircle(
             width.toFloat()/2,
             height.toFloat()/2,
-            progress * 0.1F,
+            progress,
             paint
         )
     }

@@ -74,8 +74,7 @@
             android:layout_height="50dp"
             android:layout_marginEnd="20dp"
             android:backgroundTint="@color/purple_500"
-            android:text="@string/minus_points"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/minus_points"/>
 
         <Button
             android:id="@+id/buttonPlus"
@@ -83,8 +82,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
             android:backgroundTint="@color/purple_500"
-            android:text="@string/plus_points"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/plus_points"/>
 
     </LinearLayout>
 

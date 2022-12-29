@@ -64,6 +64,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView_thread1_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:text="@string/number_zero"
+        app:layout_constraintBottom_toTopOf="@+id/customProgressBar1"
+        app:layout_constraintEnd_toStartOf="@+id/button1_up"
+        app:layout_constraintStart_toEndOf="@+id/textView_thread1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textView_thread2"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
@@ -75,10 +89,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_thread1" />
 
+    <TextView
+        android:id="@+id/textView_thread2_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:text="@string/number_zero"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/button2_up"
+        app:layout_constraintStart_toEndOf="@+id/textView_thread2"
+        app:layout_constraintTop_toBottomOf="@+id/textView_thread1"
+        app:layout_constraintVertical_bias="0.501" />
+
     <com.example.mobile_dev.lab2.CustomProgressBar
         android:id="@+id/customProgressBar1"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="25dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/textView_thread2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,11 +115,51 @@
     <com.example.mobile_dev.lab2.CustomProgressBar
         android:id="@+id/customProgressBar2"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="25dp"
         android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_thread2" />
+
+    <Button
+        android:id="@+id/button1_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minus_points"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_thread1"
+        app:layout_constraintEnd_toStartOf="@+id/textView_thread1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView_thread1" />
+
+    <Button
+        android:id="@+id/button1_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/plus_points"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_thread1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView_thread1_speed"
+        app:layout_constraintTop_toTopOf="@+id/textView_thread1" />
+
+    <Button
+        android:id="@+id/button2_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minus_points"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_thread2"
+        app:layout_constraintEnd_toStartOf="@+id/textView_thread2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView_thread2" />
+
+    <Button
+        android:id="@+id/button2_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/plus_points"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_thread2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView_thread2_speed"
+        app:layout_constraintTop_toTopOf="@+id/textView_thread2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

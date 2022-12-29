@@ -13,16 +13,15 @@ class SecondActivity : AppCompatActivity() {
     private var run1 = AtomicBoolean(false)
     private var run2 = AtomicBoolean(false)
 
-    private val increment1 = 50
-    private val increment2 = 1
-    private val sleep1: Long = 1000
-    private val sleep2: Long = 100
+    private val speedParameters1: SpeedParameters = SpeedParameters(1, 1000)
+    private val speedParameters2: SpeedParameters = SpeedParameters(1, 1000)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.page_second)
 
-        setButtons()
+        setMainButtons()
+        setSpeedButtons()
     }
 
     override fun onPause() {
@@ -30,7 +29,7 @@ class SecondActivity : AppCompatActivity() {
         stopThreads()
     }
 
-    private fun setButtons() {
+    private fun setMainButtons() {
         val buttonRun: Button = findViewById(R.id.button_run)
         val buttonStop: Button = findViewById(R.id.button_stop)
         val buttonReset: Button = findViewById(R.id.button_reset)
@@ -42,8 +41,8 @@ class SecondActivity : AppCompatActivity() {
         val progressBar2: CustomProgressBar = findViewById(R.id.customProgressBar2)
 
         buttonRun.setOnClickListener {
-            runThreadIfNotActive(run1, textView1, progressBar1, increment1, sleep1)
-            runThreadIfNotActive(run2, textView2, progressBar2, increment2, sleep2)
+            runThreadIfNotActive(run1, textView1, progressBar1, speedParameters1)
+            runThreadIfNotActive(run2, textView2, progressBar2, speedParameters2)
         }
 
         buttonStop.setOnClickListener { stopThreads() }
@@ -59,6 +58,29 @@ class SecondActivity : AppCompatActivity() {
         }
     }
 
+    private fun setSpeedButtons() {
+        setSpeedButtons(
+            findViewById(R.id.button1_up),
+            findViewById(R.id.button1_down),
+            findViewById(R.id.textView_thread1_speed),
+            speedParameters1
+        )
+
+        setSpeedButtons(
+            findViewById(R.id.button2_up),
+            findViewById(R.id.button2_down),
+            findViewById(R.id.textView_thread2_speed),
+            speedParameters2
+        )
+    }
+
+    private fun setSpeedButtons(buttonUp: Button, buttonDown: Button, textView: TextView, speedParameters: SpeedParameters) {
+        textView.text = speedParameters.step.toString()
+
+        buttonUp.setOnClickListener { textView.text = speedParameters.increment() }
+        buttonDown.setOnClickListener { textView.text = speedParameters.decrement() }
+    }
+
     private fun addToNumber(string: String, number: Int): String {
         var cur = string.toInt()
         cur += number
@@ -70,16 +92,16 @@ class SecondActivity : AppCompatActivity() {
         run2.compareAndSet(true, false)
     }
 
-    private fun runThreadIfNotActive(runFlag: AtomicBoolean, textView: TextView, progressBar: CustomProgressBar, increment: Int, sleep: Long) {
+    private fun runThreadIfNotActive(runFlag: AtomicBoolean, textView: TextView, progressBar: CustomProgressBar, speedParameters: SpeedParameters) {
         if (!runFlag.get()) {
             runFlag.set(true)
             thread {
                 while (runFlag.get()) {
                     runOnUiThread {
-                        textView.text = addToNumber(textView.text.toString(), increment)
-                        progressBar.progress += increment
+                        textView.text = addToNumber(textView.text.toString(), speedParameters.step)
+                        progressBar.progress += speedParameters.step
                     }
-                    Thread.sleep(sleep)
+                    Thread.sleep(speedParameters.sleep)
                 }
             }
         }
